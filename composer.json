@@ -11,7 +11,11 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "open-telemetry/api": "^1.2",
+        "open-telemetry/exporter-otlp": "^1.2",
+        "open-telemetry/sdk": "^1.2",
+        "open-telemetry/sem-conv": "^1.30"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -66,7 +70,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "tbachert/spi": true
         }
     },
     "minimum-stability": "stable",
