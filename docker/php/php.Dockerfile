@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG PHP_VERSION="8.4.2"
+ARG PHP_VERSION="8.4.4"
 
 FROM php:${PHP_VERSION}-fpm
 
@@ -46,17 +46,19 @@ RUN apt-get update \
 
 # Install PHP Extensions
 ARG EXTRA_INSTALL_PHP_EXTENSIONS=""
-ARG DOCKER_PHP_EXTENSION_VERSION="2.7.8"
+ARG DOCKER_PHP_EXTENSION_VERSION="2.7.25"
 RUN curl -L -o /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_VERSION}/install-php-extensions \
     && chmod a+x /usr/local/bin/install-php-extensions \
     && install-php-extensions \
         bcmath \
         exif \
+        ffi \
         fileinfo \
         gd \
         gettext \
         grpc \
         intl \
+        mbstring \
         opcache \
         opentelemetry \
         pcntl \
@@ -71,13 +73,14 @@ RUN curl -L -o /usr/local/bin/install-php-extensions https://github.com/mlocati/
         xml \
         xmlreader \
         zip \
+        zlib \
     && if [ ! -z "${EXTRA_INSTALL_PHP_EXTENSIONS}" ]; then \
         install-php-extensions ${EXTRA_INSTALL_PHP_EXTENSIONS} \
     ;fi \
     && mkdir -p -m 777 /tmp/xdebug
 
 # PHP Composer Installation & Directory Permissions
-ARG COMPOSER_VERSION="2.8.4"
+ARG COMPOSER_VERSION="2.8.5"
 RUN curl -L -o /usr/local/bin/composer https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
     && chmod ugo+x /usr/local/bin/composer \
     && composer --version
