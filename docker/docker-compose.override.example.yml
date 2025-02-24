@@ -13,3 +13,8 @@ services:
       - ./php/etc-phpfpm/php-fpm.d:/usr/local/etc/php-fpm.d
       - ./php/etc-php/php.ini:/usr/local/etc/php/php.ini
       - ../:/home/appuser/appsrc
+
+  php-cli:
+    volumes:
+      - ./php/etc-php/php.ini:/usr/local/etc/php/php.ini
+      - ../:/home/appuser/appsrc
