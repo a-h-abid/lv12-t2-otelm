@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG PHP_VERSION="8.4.4"
+ARG PHP_VERSION="8.4.6"
 
 FROM php:${PHP_VERSION}-fpm
 
@@ -46,7 +46,7 @@ RUN apt-get update \
 
 # Install PHP Extensions
 ARG EXTRA_INSTALL_PHP_EXTENSIONS=""
-ARG DOCKER_PHP_EXTENSION_VERSION="2.7.25"
+ARG DOCKER_PHP_EXTENSION_VERSION="2.7.31"
 RUN curl -L -o /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_VERSION}/install-php-extensions \
     && chmod a+x /usr/local/bin/install-php-extensions \
     && install-php-extensions \
