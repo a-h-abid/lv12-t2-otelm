@@ -11,8 +11,15 @@ services:
         TIMEZONE: ${APP_TIMEZONE:-Asia/Dhaka}
         EXTRA_INSTALL_APT_PACKAGES: ${NGINX_EXTRA_INSTALL_APT_PACKAGES:-}
     depends_on:
-      - php
+      php:
+        condition: service_healthy
+        required: true
     restart: no
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 5s
+      timeout: 10s
+      retries: ${NGINX_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
         aliases:
@@ -40,6 +47,11 @@ services:
     env_file:
       - .envs/php-fpm.env
       - .envs/php-ini.env
+    healthcheck:
+        test: ["CMD", "php-fpm", "-t"]
+        interval: 5s
+        timeout: 10s
+        retries: ${PHP_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
         aliases:
