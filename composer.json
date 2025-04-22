@@ -16,6 +16,7 @@
         "open-telemetry/exporter-otlp": "^1.2",
         "open-telemetry/sdk": "^1.2",
         "open-telemetry/sem-conv": "^1.30",
+        "open-telemetry/transport-grpc": "^1.1",
         "php-http/guzzle7-adapter": "^1.1"
     },
     "require-dev": {
