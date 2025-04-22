@@ -47,6 +47,7 @@ services:
     env_file:
       - .envs/php-fpm.env
       - .envs/php-ini.env
+      - .envs/app.env
     healthcheck:
         test: ["CMD", "php-fpm", "-t"]
         interval: 5s
