@@ -15,7 +15,8 @@
         "open-telemetry/api": "^1.2",
         "open-telemetry/exporter-otlp": "^1.2",
         "open-telemetry/sdk": "^1.2",
-        "open-telemetry/sem-conv": "^1.30"
+        "open-telemetry/sem-conv": "^1.30",
+        "php-http/guzzle7-adapter": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
