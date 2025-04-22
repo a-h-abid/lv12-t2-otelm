@@ -16,7 +16,7 @@ services:
         required: true
     restart: no
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/_health"]
       interval: 5s
       timeout: 10s
       retries: ${NGINX_HEALTHCHECK_RETRIES:-7}
