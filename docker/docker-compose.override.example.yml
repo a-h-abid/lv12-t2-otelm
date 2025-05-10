@@ -1,5 +1,10 @@
 services:
   nginx:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/_health"]
+      interval: ${NGINX_HEALTHCHECK_INTERVAL:-5s}
+      timeout: ${NGINX_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${NGINX_HEALTHCHECK_RETRIES:-7}
     ports:
       - "8080:8080"
     volumes:
@@ -8,6 +13,11 @@ services:
       - ../public:/home/appuser/appsrc/public
 
   php:
+    healthcheck:
+        test: ["CMD", "php-fpm", "-t"]
+        interval: ${PHP_HEALTHCHECK_INTERVAL:-10s}
+        timeout: ${PHP_HEALTHCHECK_TIMEOUT:-5s}
+        retries: ${PHP_HEALTHCHECK_RETRIES:-7}
     volumes:
       - ./php/etc-phpfpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php/etc-phpfpm/php-fpm.d:/usr/local/etc/php-fpm.d

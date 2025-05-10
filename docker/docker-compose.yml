@@ -15,11 +15,6 @@ services:
         condition: service_healthy
         required: true
     restart: no
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/_health"]
-      interval: ${NGINX_HEALTHCHECK_INTERVAL:-5s}
-      timeout: ${NGINX_HEALTHCHECK_TIMEOUT:-10s}
-      retries: ${NGINX_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
         aliases:
@@ -48,11 +43,6 @@ services:
       - .envs/php-fpm.env
       - .envs/php-ini.env
       - .envs/app.env
-    healthcheck:
-        test: ["CMD", "php-fpm", "-t"]
-        interval: ${PHP_HEALTHCHECK_INTERVAL:-10s}
-        timeout: ${PHP_HEALTHCHECK_TIMEOUT:-5s}
-        retries: ${PHP_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
         aliases:
