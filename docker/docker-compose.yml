@@ -17,8 +17,8 @@ services:
     restart: no
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/_health"]
-      interval: 5s
-      timeout: 10s
+      interval: ${NGINX_HEALTHCHECK_INTERVAL:-5s}
+      timeout: ${NGINX_HEALTHCHECK_TIMEOUT:-10s}
       retries: ${NGINX_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
@@ -50,8 +50,8 @@ services:
       - .envs/app.env
     healthcheck:
         test: ["CMD", "php-fpm", "-t"]
-        interval: 5s
-        timeout: 10s
+        interval: ${PHP_HEALTHCHECK_INTERVAL:-10s}
+        timeout: ${PHP_HEALTHCHECK_TIMEOUT:-5s}
         retries: ${PHP_HEALTHCHECK_RETRIES:-7}
     networks:
       common-net:
